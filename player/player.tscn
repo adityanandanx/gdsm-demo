@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://3xnyfj6nkjx4"]
+[gd_scene load_steps=51 format=3 uid="uid://3xnyfj6nkjx4"]
 
 [ext_resource type="Texture2D" uid="uid://0exvproycgdy" path="res://player/knight.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://bo0p4r0op0a66" path="res://player/player.gd" id="1_rkbax"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://0g0op521qtll" path="res://player/states/rolling.gd" id="8_rgyib"]
 [ext_resource type="Script" uid="uid://d13o011rygm17" path="res://player/states/dead.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://boheapt7wbqow" path="res://player/states/hit.gd" id="10_8t03j"]
+[ext_resource type="Script" uid="uid://bm2qifnxhkkv0" path="res://player/states/wall_grab.gd" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://d4arokx660iww" path="res://player/states/wall_jump.gd" id="12_ebec5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oul6g"]
 radius = 6.0
@@ -297,8 +299,6 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "state_machine") groups=["player"]]
 script = ExtResource("1_rkbax")
-jump_impulse = 500.0
-jump_cut_multiplier = 0.2
 max_rolls = 1
 animated_sprite = NodePath("AnimatedSprite2D")
 state_machine = NodePath("StateMachine")
@@ -315,7 +315,7 @@ frame_progress = 0.11517481
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_yw30f")
-initial_state = NodePath("Running")
+initial_state = NodePath("Idle")
 debug_text = true
 
 [node name="Idle" type="Node" parent="StateMachine"]
@@ -338,3 +338,9 @@ script = ExtResource("9_hg6s5")
 
 [node name="Hit" type="Node" parent="StateMachine"]
 script = ExtResource("10_8t03j")
+
+[node name="WallGrab" type="Node" parent="StateMachine"]
+script = ExtResource("11_2ieo8")
+
+[node name="WallJump" type="Node" parent="StateMachine"]
+script = ExtResource("12_ebec5")

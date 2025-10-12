@@ -8,6 +8,8 @@ const FALLING = "Falling"
 const ROLLING = "Rolling"
 const DEAD = "Dead"
 const HIT = "Hit"
+const WALLGRAB = "WallGrab"
+const WALLJUMP = "WallJump"
 
 var player: Player
 

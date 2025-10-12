@@ -11,6 +11,8 @@ func physics_update(delta: float) -> void:
 
 	if Input.is_action_just_pressed("roll"):
 		finished.emit(ROLLING, {"inp_dir": input_direction_x})
+	if player.is_on_wall_only():
+		finished.emit(WALLGRAB)
 	if player.is_on_floor():
 		if is_equal_approx(input_direction_x, 0.0):
 			finished.emit(IDLE)
