@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var max_rolls := 3
 @export var roll_speed := 150.0
 @export var roll_gravity_factor := 2.0
-@export var wall_grab_strength := 2.0
+@export var wall_grab_strength := 10.0
 @export var wall_jump_impulse := 500.0
 @export var wall_jump_speed := 100.0
 @export var animated_sprite: AnimatedSprite2D
