@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var wall_jump_speed := 100.0
 @export var animated_sprite: AnimatedSprite2D
 @export var state_machine: StateMachine
+@export var cam: Camera2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 

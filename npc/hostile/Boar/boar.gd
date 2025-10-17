@@ -5,8 +5,10 @@ extends Hostile
 @export var roam_time: float = 4.0
 @export var idle_time: float = 1.0
 @export var move_speed: float = 100.0
+@export var attack_anticipation_duration: float = 2
 
 @export var idle_roam_timer: Timer
+@export var attack_anticipation_timer: Timer
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -16,6 +18,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var wall_check_distance: float = 35.0
 @export var floor_check_distance: float = 35.0
 @export var floor_check_depth: float = 22.0
+
+@export var flippables: Node2D
+
+@export var view_zone: Area2D
 
 func _ready() -> void:
 	assert(ray_wall && ray_floor, "Rays not set")

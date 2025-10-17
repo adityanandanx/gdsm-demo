@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b6uhnm1f74cb0"]
+[gd_scene load_steps=35 format=3 uid="uid://b6uhnm1f74cb0"]
 
 [ext_resource type="Script" uid="uid://tow8d4k4aov2" path="res://npc/hostile/Boar/boar.gd" id="1_ggrl0"]
 [ext_resource type="Texture2D" uid="uid://dimpcc8ka4rkc" path="res://npc/hostile/Boar/sprites/Hit-Vanish/Hit-Sheet-White.png" id="2_25ss1"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" uid="uid://cha00kquvemsu" path="res://npc/hostile/Boar/states/idle.gd" id="7_s5t6y"]
 [ext_resource type="Script" uid="uid://1yno2tcrr5bx" path="res://npc/hostile/Boar/states/roam.gd" id="8_tbdi0"]
 [ext_resource type="Script" uid="uid://d3y0prv01r25k" path="res://npc/hostile/Boar/states/attack.gd" id="9_gl0r1"]
+[ext_resource type="Script" uid="uid://dn7llhiptva7d" path="res://npc/hostile/Boar/states/attack_anticipation.gd" id="9_ytwmg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s5t6y"]
+radius = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x0pw2"]
 atlas = ExtResource("2_25ss1")
@@ -176,22 +180,46 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi4hi"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s5t6y"]
-radius = 12.0
-
-[node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "ray_wall", "ray_floor")]
+[node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "attack_anticipation_timer", "ray_wall", "ray_floor", "flippables", "view_zone")]
 script = ExtResource("1_ggrl0")
-animated_sprite = NodePath("AnimatedSprite2D")
+animated_sprite = NodePath("Flippables/AnimatedSprite2D")
+roam_time = 20.0
 idle_roam_timer = NodePath("IdleRoamTimer")
-ray_wall = NodePath("RayWallCheck")
-ray_floor = NodePath("RayFloorCheck")
+attack_anticipation_timer = NodePath("AttackAnticipationTimer")
+ray_wall = NodePath("Flippables/RayWallCheck")
+ray_floor = NodePath("Flippables/RayFloorCheck")
+flippables = NodePath("Flippables")
+view_zone = NodePath("Flippables/ViewZone")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Flippables" type="Node2D" parent="."]
+
+[node name="DamageZone" parent="Flippables" instance=ExtResource("7_1dm57")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Flippables/DamageZone"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_s5t6y")
+
+[node name="RayFloorCheck" type="RayCast2D" parent="Flippables"]
+position = Vector2(35, -11)
+target_position = Vector2(0, 22)
+collision_mask = 2
+
+[node name="RayWallCheck" type="RayCast2D" parent="Flippables"]
+position = Vector2(0, -11)
+target_position = Vector2(35, 0)
+collision_mask = 2
+
+[node name="ViewZone" type="Area2D" parent="Flippables"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flippables/ViewZone"]
+polygon = PackedVector2Array(-47, -16, 110, -51, 110, -1, -47, -1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flippables"]
 position = Vector2(0, -16)
-scale = Vector2(-1, 1)
+rotation = 3.1415927
+scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_ciqko")
-animation = &"walk"
-frame_progress = 0.9281795
+animation = &"hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
@@ -209,25 +237,18 @@ script = ExtResource("7_s5t6y")
 [node name="Roam" type="Node" parent="StateMachine"]
 script = ExtResource("8_tbdi0")
 
+[node name="AttackAnticipation" type="Node" parent="StateMachine"]
+script = ExtResource("9_ytwmg")
+
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("9_gl0r1")
 
 [node name="Hit" type="Node" parent="StateMachine"]
 
-[node name="DamageZone" parent="." instance=ExtResource("7_1dm57")]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageZone"]
-position = Vector2(0, -11)
-shape = SubResource("CircleShape2D_s5t6y")
-
 [node name="IdleRoamTimer" type="Timer" parent="."]
 
-[node name="RayFloorCheck" type="RayCast2D" parent="."]
-position = Vector2(35, -11)
-target_position = Vector2(0, 22)
-collision_mask = 2
+[node name="AttackAnticipationTimer" type="Timer" parent="."]
 
-[node name="RayWallCheck" type="RayCast2D" parent="."]
-position = Vector2(0, -11)
-target_position = Vector2(35, 0)
-collision_mask = 2
+[connection signal="body_entered" from="Flippables/ViewZone" to="StateMachine/Idle" method="_on_view_zone_body_entered"]
+[connection signal="body_entered" from="Flippables/ViewZone" to="StateMachine/Roam" method="_on_view_zone_body_entered"]
+[connection signal="body_exited" from="Flippables/ViewZone" to="StateMachine/Attack" method="_on_view_zone_body_exited"]

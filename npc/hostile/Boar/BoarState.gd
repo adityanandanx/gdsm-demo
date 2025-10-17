@@ -4,6 +4,7 @@ extends State
 const IDLE = "Idle"
 const ROAM = "Roam"
 const ATTACK = "Attack"
+const ATTACK_ANTICIPATION = "AttackAnticipation"
 const HIT = "Hit"
 
 var boar: Boar

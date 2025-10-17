@@ -3,10 +3,8 @@ extends BoarState
 
 var dir: int = 1:
 	set(value):
-		if (dir != value): # prev is not equal to new then flip the rays mf
-			boar.ray_wall.target_position.x *= -1
-			boar.ray_floor.position.x *= -1
 		dir = value
+		boar.flippables.scale.x = dir
 		
 
 func enter(previous_state_path: String, data := {}) -> void:
@@ -23,7 +21,15 @@ func physics_update(delta: float) -> void:
 	var isok = (not wall) and floo
 	if not isok:
 		dir = -dir
-	boar.animated_sprite.flip_h = dir < 0
+	#boar.animated_sprite.flip_h = dir < 0
 	boar.velocity.y += boar.gravity * delta
 	boar.velocity.x = dir * boar.move_speed
 	boar.move_and_slide()
+
+func exit() -> void:
+	boar.idle_roam_timer.stop()
+
+func _on_view_zone_body_entered(body: Node2D) -> void:
+	if body is Player:
+		finished.emit(ATTACK_ANTICIPATION, {"dir": 1 if boar.global_position.x < body.global_position.x else -1})
+	pass
