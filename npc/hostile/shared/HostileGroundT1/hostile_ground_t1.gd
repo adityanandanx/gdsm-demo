@@ -1,4 +1,4 @@
-class_name Boar
+class_name HostileGroundT1
 extends Hostile
 
 @export var animated_sprite: AnimatedSprite2D

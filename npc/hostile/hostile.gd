@@ -1,4 +1,4 @@
 class_name Hostile
-extends NPC
+extends CharacterBody2D
 
 @export var damage_amt: float = 20.0

@@ -1,98 +1,98 @@
-[gd_scene load_steps=35 format=3 uid="uid://b6uhnm1f74cb0"]
+[gd_scene load_steps=35 format=3 uid="uid://v5bw8u5n1yi1"]
 
-[ext_resource type="Script" uid="uid://tow8d4k4aov2" path="res://npc/hostile/shared/HostileGroundT1/hostile_ground_t1.gd" id="1_ggrl0"]
-[ext_resource type="Texture2D" uid="uid://dimpcc8ka4rkc" path="res://npc/hostile/Boar/sprites/Hit-Vanish/Hit-Sheet-White.png" id="2_25ss1"]
-[ext_resource type="Texture2D" uid="uid://do7qyb6wa74b" path="res://npc/hostile/Boar/sprites/Idle/Idle-Sheet-White.png" id="3_c7nvb"]
-[ext_resource type="Texture2D" uid="uid://j5b7jul650fp" path="res://npc/hostile/Boar/sprites/Run/Run-Sheet-White.png" id="4_8fwhe"]
-[ext_resource type="Texture2D" uid="uid://bhqxjfckua8i1" path="res://npc/hostile/Boar/sprites/Walk/Walk-Base-Sheet-White.png" id="5_64bex"]
-[ext_resource type="Script" uid="uid://eyfgjxm21k1i" path="res://utils/StateMachine.gd" id="6_lvhl1"]
-[ext_resource type="PackedScene" uid="uid://b3urqe4ltnped" path="res://zones/damage_zone.tscn" id="7_1dm57"]
-[ext_resource type="Script" uid="uid://cha00kquvemsu" path="res://npc/hostile/shared/HostileGroundT1/states/idle.gd" id="7_s5t6y"]
-[ext_resource type="Script" uid="uid://1yno2tcrr5bx" path="res://npc/hostile/shared/HostileGroundT1/states/roam.gd" id="8_tbdi0"]
-[ext_resource type="Script" uid="uid://d3y0prv01r25k" path="res://npc/hostile/shared/HostileGroundT1/states/attack.gd" id="9_gl0r1"]
-[ext_resource type="Script" uid="uid://dn7llhiptva7d" path="res://npc/hostile/shared/HostileGroundT1/states/attack_anticipation.gd" id="9_ytwmg"]
+[ext_resource type="Script" uid="uid://tow8d4k4aov2" path="res://npc/hostile/shared/HostileGroundT1/hostile_ground_t1.gd" id="1_7yqyk"]
+[ext_resource type="PackedScene" uid="uid://b3urqe4ltnped" path="res://zones/damage_zone.tscn" id="2_m2ifh"]
+[ext_resource type="Texture2D" uid="uid://j5b7jul650fp" path="res://npc/hostile/Boar/sprites/Run/Run-Sheet-White.png" id="3_8rqr0"]
+[ext_resource type="Texture2D" uid="uid://dimpcc8ka4rkc" path="res://npc/hostile/Boar/sprites/Hit-Vanish/Hit-Sheet-White.png" id="4_5wylc"]
+[ext_resource type="Texture2D" uid="uid://do7qyb6wa74b" path="res://npc/hostile/Boar/sprites/Idle/Idle-Sheet-White.png" id="5_tkqau"]
+[ext_resource type="Texture2D" uid="uid://bhqxjfckua8i1" path="res://npc/hostile/Boar/sprites/Walk/Walk-Base-Sheet-White.png" id="6_hco6h"]
+[ext_resource type="Script" uid="uid://eyfgjxm21k1i" path="res://utils/StateMachine.gd" id="7_4ntrb"]
+[ext_resource type="Script" uid="uid://cha00kquvemsu" path="res://npc/hostile/shared/HostileGroundT1/states/idle.gd" id="8_wu11p"]
+[ext_resource type="Script" uid="uid://1yno2tcrr5bx" path="res://npc/hostile/shared/HostileGroundT1/states/roam.gd" id="9_b0k85"]
+[ext_resource type="Script" uid="uid://dn7llhiptva7d" path="res://npc/hostile/shared/HostileGroundT1/states/attack_anticipation.gd" id="10_q3v10"]
+[ext_resource type="Script" uid="uid://d3y0prv01r25k" path="res://npc/hostile/shared/HostileGroundT1/states/attack.gd" id="11_j5ydc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s5t6y"]
 radius = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f3q0m"]
-atlas = ExtResource("4_8fwhe")
+atlas = ExtResource("3_8rqr0")
 region = Rect2(240, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y77s7"]
-atlas = ExtResource("4_8fwhe")
+atlas = ExtResource("3_8rqr0")
 region = Rect2(0, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmukj"]
-atlas = ExtResource("2_25ss1")
+atlas = ExtResource("4_5wylc")
 region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x0pw2"]
-atlas = ExtResource("2_25ss1")
+atlas = ExtResource("4_5wylc")
 region = Rect2(0, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vexpa"]
-atlas = ExtResource("2_25ss1")
+atlas = ExtResource("4_5wylc")
 region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7uufb"]
-atlas = ExtResource("2_25ss1")
+atlas = ExtResource("4_5wylc")
 region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k4woc"]
-atlas = ExtResource("3_c7nvb")
+atlas = ExtResource("5_tkqau")
 region = Rect2(0, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6edb"]
-atlas = ExtResource("3_c7nvb")
+atlas = ExtResource("5_tkqau")
 region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yvtob"]
-atlas = ExtResource("3_c7nvb")
+atlas = ExtResource("5_tkqau")
 region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bww4p"]
-atlas = ExtResource("3_c7nvb")
+atlas = ExtResource("5_tkqau")
 region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqjdl"]
-atlas = ExtResource("4_8fwhe")
+atlas = ExtResource("3_8rqr0")
 region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uemyg"]
-atlas = ExtResource("4_8fwhe")
+atlas = ExtResource("3_8rqr0")
 region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5qtki"]
-atlas = ExtResource("4_8fwhe")
+atlas = ExtResource("3_8rqr0")
 region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_leuca"]
-atlas = ExtResource("4_8fwhe")
+atlas = ExtResource("3_8rqr0")
 region = Rect2(192, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b4bcb"]
-atlas = ExtResource("5_64bex")
+atlas = ExtResource("6_hco6h")
 region = Rect2(0, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aonpq"]
-atlas = ExtResource("5_64bex")
+atlas = ExtResource("6_hco6h")
 region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_33atm"]
-atlas = ExtResource("5_64bex")
+atlas = ExtResource("6_hco6h")
 region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_423pq"]
-atlas = ExtResource("5_64bex")
+atlas = ExtResource("6_hco6h")
 region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yp3gu"]
-atlas = ExtResource("5_64bex")
+atlas = ExtResource("6_hco6h")
 region = Rect2(192, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y8pqu"]
-atlas = ExtResource("5_64bex")
+atlas = ExtResource("6_hco6h")
 region = Rect2(240, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ciqko"]
@@ -201,7 +201,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi4hi"]
 
 [node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "ray_wall", "ray_floor", "flippables", "view_zone")]
-script = ExtResource("1_ggrl0")
+script = ExtResource("1_7yqyk")
 animated_sprite = NodePath("Flippables/AnimatedSprite2D")
 roam_time = 20.0
 idle_roam_timer = NodePath("IdleRoamTimer")
@@ -212,7 +212,7 @@ view_zone = NodePath("Flippables/ViewZone")
 
 [node name="Flippables" type="Node2D" parent="."]
 
-[node name="DamageZone" parent="Flippables" instance=ExtResource("7_1dm57")]
+[node name="DamageZone" parent="Flippables" instance=ExtResource("2_m2ifh")]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Flippables/DamageZone"]
 position = Vector2(0, -11)
@@ -247,22 +247,22 @@ position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_oi4hi")
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("initial_state")]
-script = ExtResource("6_lvhl1")
+script = ExtResource("7_4ntrb")
 initial_state = NodePath("Idle")
 debug_text = true
 metadata/_custom_type_script = "uid://eyfgjxm21k1i"
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("7_s5t6y")
+script = ExtResource("8_wu11p")
 
 [node name="Roam" type="Node" parent="StateMachine"]
-script = ExtResource("8_tbdi0")
+script = ExtResource("9_b0k85")
 
 [node name="AttackAnticipation" type="Node" parent="StateMachine"]
-script = ExtResource("9_ytwmg")
+script = ExtResource("10_q3v10")
 
 [node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource("9_gl0r1")
+script = ExtResource("11_j5ydc")
 
 [node name="Hit" type="Node" parent="StateMachine"]
 

@@ -33,6 +33,7 @@ version_control/autoload_on_startup=true
 
 folder_colors={
 "res://npc/hostile/": "red",
+"res://npc/hostile/shared/": "orange",
 "res://zones/": "yellow"
 }
 
