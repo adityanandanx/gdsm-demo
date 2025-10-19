@@ -4,11 +4,12 @@ extends Hostile
 @export var animated_sprite: AnimatedSprite2D
 @export var roam_time: float = 4.0
 @export var idle_time: float = 1.0
-@export var move_speed: float = 100.0
+@export var move_speed: float = 80.0
 @export var attack_anticipation_duration: float = 2
+@export var attack_duration: float = 2
+@export var attack_speed: float = 125.0
 
 @export var idle_roam_timer: Timer
-@export var attack_anticipation_timer: Timer
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 

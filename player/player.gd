@@ -25,7 +25,7 @@ var health: int = max_health:
 #func _ready() -> void:
 	#pass
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if velocity.x < 0:
 		animated_sprite.flip_h = true
 	elif velocity.x > 0:

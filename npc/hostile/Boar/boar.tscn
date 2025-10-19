@@ -15,6 +15,18 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_s5t6y"]
 radius = 12.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3q0m"]
+atlas = ExtResource("4_8fwhe")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y77s7"]
+atlas = ExtResource("4_8fwhe")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmukj"]
+atlas = ExtResource("2_25ss1")
+region = Rect2(96, 0, 48, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_x0pw2"]
 atlas = ExtResource("2_25ss1")
 region = Rect2(0, 0, 48, 32)
@@ -22,10 +34,6 @@ region = Rect2(0, 0, 48, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vexpa"]
 atlas = ExtResource("2_25ss1")
 region = Rect2(48, 0, 48, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xmukj"]
-atlas = ExtResource("2_25ss1")
-region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7uufb"]
 atlas = ExtResource("2_25ss1")
@@ -47,10 +55,6 @@ region = Rect2(96, 0, 48, 32)
 atlas = ExtResource("3_c7nvb")
 region = Rect2(144, 0, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y77s7"]
-atlas = ExtResource("4_8fwhe")
-region = Rect2(0, 0, 48, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_lqjdl"]
 atlas = ExtResource("4_8fwhe")
 region = Rect2(48, 0, 48, 32)
@@ -66,10 +70,6 @@ region = Rect2(144, 0, 48, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_leuca"]
 atlas = ExtResource("4_8fwhe")
 region = Rect2(192, 0, 48, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3q0m"]
-atlas = ExtResource("4_8fwhe")
-region = Rect2(240, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b4bcb"]
 atlas = ExtResource("5_64bex")
@@ -97,6 +97,26 @@ region = Rect2(240, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ciqko"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3q0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y77s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmukj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y77s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3q0m")
+}],
+"loop": true,
+"name": &"attack_anticipate",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x0pw2")
@@ -180,12 +200,11 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi4hi"]
 
-[node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "attack_anticipation_timer", "ray_wall", "ray_floor", "flippables", "view_zone")]
+[node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "ray_wall", "ray_floor", "flippables", "view_zone")]
 script = ExtResource("1_ggrl0")
 animated_sprite = NodePath("Flippables/AnimatedSprite2D")
 roam_time = 20.0
 idle_roam_timer = NodePath("IdleRoamTimer")
-attack_anticipation_timer = NodePath("AttackAnticipationTimer")
 ray_wall = NodePath("Flippables/RayWallCheck")
 ray_floor = NodePath("Flippables/RayFloorCheck")
 flippables = NodePath("Flippables")
@@ -212,14 +231,16 @@ collision_mask = 2
 [node name="ViewZone" type="Area2D" parent="Flippables"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Flippables/ViewZone"]
-polygon = PackedVector2Array(-47, -16, 110, -51, 110, -1, -47, -1)
+polygon = PackedVector2Array(0, -11, 110, -51, 110, -1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Flippables"]
+modulate = Color(0.5915366, 0.56847733, 0.77201176, 1)
 position = Vector2(0, -16)
 rotation = 3.1415927
 scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_ciqko")
-animation = &"hit"
+animation = &"attack_anticipate"
+frame_progress = 0.22291434
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
@@ -246,9 +267,3 @@ script = ExtResource("9_gl0r1")
 [node name="Hit" type="Node" parent="StateMachine"]
 
 [node name="IdleRoamTimer" type="Timer" parent="."]
-
-[node name="AttackAnticipationTimer" type="Timer" parent="."]
-
-[connection signal="body_entered" from="Flippables/ViewZone" to="StateMachine/Idle" method="_on_view_zone_body_entered"]
-[connection signal="body_entered" from="Flippables/ViewZone" to="StateMachine/Roam" method="_on_view_zone_body_entered"]
-[connection signal="body_exited" from="Flippables/ViewZone" to="StateMachine/Attack" method="_on_view_zone_body_exited"]

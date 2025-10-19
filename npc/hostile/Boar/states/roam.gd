@@ -8,6 +8,7 @@ var dir: int = 1:
 		
 
 func enter(previous_state_path: String, data := {}) -> void:
+	boar.view_zone.body_entered.connect(_on_view_zone_body_entered)
 	boar.animated_sprite.play("walk")
 	dir = [-1, 1].pick_random()
 	var t = boar.roam_time
@@ -28,6 +29,7 @@ func physics_update(delta: float) -> void:
 
 func exit() -> void:
 	boar.idle_roam_timer.stop()
+	boar.view_zone.body_entered.disconnect(_on_view_zone_body_entered)
 
 func _on_view_zone_body_entered(body: Node2D) -> void:
 	if body is Player:
