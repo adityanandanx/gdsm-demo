@@ -15,8 +15,7 @@ extends CharacterBody2D
 @export var state_machine: StateMachine
 @export var cam: Camera2D
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * 2
 
 var health: int = max_health:
 	set(new):
@@ -28,8 +27,10 @@ var health: int = max_health:
 func _process(delta: float) -> void:
 	if velocity.x < 0:
 		animated_sprite.flip_h = true
+		$Directed.scale.x = -1
 	elif velocity.x > 0:
 		animated_sprite.flip_h = false
+		$Directed.scale.x = 1
 
 func damage(delta: int) -> void:
 	health -= delta

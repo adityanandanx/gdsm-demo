@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://b6uhnm1f74cb0"]
+[gd_scene load_steps=37 format=3 uid="uid://b6uhnm1f74cb0"]
 
 [ext_resource type="Script" uid="uid://tow8d4k4aov2" path="res://npc/hostile/shared/HostileGroundT1/hostile_ground_t1.gd" id="1_ggrl0"]
 [ext_resource type="Texture2D" uid="uid://dimpcc8ka4rkc" path="res://npc/hostile/Boar/sprites/Hit-Vanish/Hit-Sheet-White.png" id="2_25ss1"]
+[ext_resource type="PackedScene" uid="uid://cak2bq810t5q7" path="res://utils/health/Health.tscn" id="2_ir24g"]
 [ext_resource type="Texture2D" uid="uid://do7qyb6wa74b" path="res://npc/hostile/Boar/sprites/Idle/Idle-Sheet-White.png" id="3_c7nvb"]
 [ext_resource type="Texture2D" uid="uid://j5b7jul650fp" path="res://npc/hostile/Boar/sprites/Run/Run-Sheet-White.png" id="4_8fwhe"]
 [ext_resource type="Texture2D" uid="uid://bhqxjfckua8i1" path="res://npc/hostile/Boar/sprites/Walk/Walk-Base-Sheet-White.png" id="5_64bex"]
@@ -11,6 +12,9 @@
 [ext_resource type="Script" uid="uid://1yno2tcrr5bx" path="res://npc/hostile/shared/HostileGroundT1/states/roam.gd" id="8_tbdi0"]
 [ext_resource type="Script" uid="uid://d3y0prv01r25k" path="res://npc/hostile/shared/HostileGroundT1/states/attack.gd" id="9_gl0r1"]
 [ext_resource type="Script" uid="uid://dn7llhiptva7d" path="res://npc/hostile/shared/HostileGroundT1/states/attack_anticipation.gd" id="9_ytwmg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ir24g"]
+radius = 25.019993
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s5t6y"]
 radius = 12.0
@@ -199,8 +203,9 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi4hi"]
+radius = 11.18034
 
-[node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "ray_wall", "ray_floor", "flippables", "view_zone")]
+[node name="Boar" type="CharacterBody2D" node_paths=PackedStringArray("animated_sprite", "idle_roam_timer", "ray_wall", "ray_floor", "flippables", "view_zone") groups=["hurtable_by_player"]]
 script = ExtResource("1_ggrl0")
 animated_sprite = NodePath("Flippables/AnimatedSprite2D")
 roam_time = 20.0
@@ -209,6 +214,12 @@ ray_wall = NodePath("Flippables/RayWallCheck")
 ray_floor = NodePath("Flippables/RayFloorCheck")
 flippables = NodePath("Flippables")
 view_zone = NodePath("Flippables/ViewZone")
+
+[node name="Health" parent="." instance=ExtResource("2_ir24g")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Health"]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_ir24g")
 
 [node name="Flippables" type="Node2D" parent="."]
 
@@ -267,3 +278,6 @@ script = ExtResource("9_gl0r1")
 [node name="Hit" type="Node" parent="StateMachine"]
 
 [node name="IdleRoamTimer" type="Timer" parent="."]
+
+[connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]

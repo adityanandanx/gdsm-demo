@@ -7,6 +7,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 	var t = actor.idle_time
 	actor.idle_roam_timer.start(t)
 	await actor.idle_roam_timer.timeout
+	actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.2)
 	finished.emit(ROAM)
 	
 func physics_update(delta: float) -> void:
@@ -18,7 +19,6 @@ func exit() -> void:
 	actor.view_zone.body_entered.disconnect(_on_view_zone_body_entered)
 
 func _on_view_zone_body_entered(body: Node2D) -> void:
-	print("LKJSLDFKJ")
 	if body is Player:
 		finished.emit(ATTACK_ANTICIPATION, {"dir": 1 if actor.global_position.x < body.global_position.x else -1 })
 	pass

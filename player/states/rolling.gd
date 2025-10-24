@@ -16,7 +16,6 @@ func enter(previous_state_path: String, data := {}) -> void:
 	var roll_count := 0
 	while roll_count < player.max_rolls:
 		await player.animated_sprite.animation_looped
-		print("ROLL ", roll_count)
 		roll_count += 1
 	finished.emit(RUNNING)
 

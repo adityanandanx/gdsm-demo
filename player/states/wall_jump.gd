@@ -1,24 +1,15 @@
 extends PlayerState
 
-func enter(previous_state_path: String, data := {}) -> void:
-	#player.velocity.y = -player.wall_jump_impulse
-	#player.velocity.x = sign(player.get_wall_normal().x) * player.wall_jump_speed
-	player.velocity.y = -player.jump_impulse
-	player.velocity.x = Input.get_axis("move_left", "move_right") * 1.5 * player.speed
-	print(player.velocity.x)
-	player.animated_sprite.play("jump")
+@export var thrust: Vector2 = Vector2(400, -500)
 
-func physics_update(delta: float) -> void:
-	var input_direction_x := Input.get_axis("move_left", "move_right")
-	#player.velocity.x = player.speed * input_direction_x
-	player.velocity.y += player.gravity * delta * 0.5
+func enter (previous_state_path: String, data: Dictionary = {}) -> void:
+	var direction = -1 if player.animated_sprite.flip_h else 1
+	player.velocity.x = thrust.x * -direction
+	player.velocity.y = thrust.y
+	
+	await get_tree().create_timer(0.1).timeout
+	finished.emit(FALLING)
 
-	if Input.is_action_just_released("jump"):
-		player.velocity.y *= player.jump_cut_multiplier
+func physics_update(_delta: float) -> void:
+	player.velocity.y += player.gravity * _delta / 2
 	player.move_and_slide()
-	if Input.is_action_just_pressed("roll"):
-		finished.emit(ROLLING, {"inp_dir": player.get_last_motion().x})
-	if player.velocity.y >= 0:
-		finished.emit(FALLING)
-		
-# https://youtu.be/fYnURBEIogk?si=HdtVDkRpgHk7ywNJ

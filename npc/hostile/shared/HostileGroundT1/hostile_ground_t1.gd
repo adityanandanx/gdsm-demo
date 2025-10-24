@@ -4,7 +4,7 @@ extends Hostile
 @export var animated_sprite: AnimatedSprite2D
 @export var roam_time: float = 4.0
 @export var idle_time: float = 1.0
-@export var move_speed: float = 80.0
+@export var move_speed: float = 800.0
 @export var attack_anticipation_duration: float = 2
 @export var attack_duration: float = 2
 @export var attack_speed: float = 125.0
@@ -29,3 +29,12 @@ func _ready() -> void:
 	ray_floor.position.x = floor_check_distance
 	ray_floor.target_position.y = floor_check_depth
 	ray_wall.target_position.x = wall_check_distance
+
+
+func _on_health_death() -> void:
+	queue_free()
+
+
+func _on_health_damaged(amt: int, from_dir: int) -> void:
+	velocity.x = -from_dir * 200
+	velocity.y = -200

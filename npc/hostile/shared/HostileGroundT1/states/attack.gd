@@ -7,7 +7,6 @@ var dir = 1:
 
 func enter(previous_state_path: String, data := {}) -> void:
 	actor.animated_sprite.play("run")
-	print("ATTACK")
 	var _dir = data.get('dir', null)
 	assert(_dir, "Direction of attack not provided from state: " + previous_state_path)
 	dir = _dir
@@ -18,7 +17,8 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	actor.velocity.y += actor.gravity * delta
-	actor.velocity.x = actor.attack_speed * dir
+	actor.velocity.x += dir * actor.move_speed * 2 * delta
+	actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.2)
 	actor.move_and_slide()
 
 #func exit() -> void:
@@ -26,5 +26,4 @@ func physics_update(delta: float) -> void:
 
 func _on_view_zone_body_exited(body: Node2D) -> void:
 	if body is Player:
-		print("EXITED")
 		finished.emit(IDLE)

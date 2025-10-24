@@ -10,6 +10,7 @@ const DEAD = "Dead"
 const HIT = "Hit"
 const WALLGRAB = "WallGrab"
 const WALLJUMP = "WallJump"
+const ATTACK = "Attack"
 
 var player: Player
 

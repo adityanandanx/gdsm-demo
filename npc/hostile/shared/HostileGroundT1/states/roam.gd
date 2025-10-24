@@ -24,7 +24,10 @@ func physics_update(delta: float) -> void:
 		dir = -dir
 	#actor.animated_sprite.flip_h = dir < 0
 	actor.velocity.y += actor.gravity * delta
-	actor.velocity.x = dir * actor.move_speed
+	actor.velocity.x += dir * actor.move_speed * delta
+	
+	if actor.is_on_floor():
+		actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.2)
 	actor.move_and_slide()
 
 func exit() -> void:

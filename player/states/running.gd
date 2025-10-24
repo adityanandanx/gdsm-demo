@@ -18,5 +18,8 @@ func physics_update(delta: float) -> void:
 	elif is_equal_approx(input_direction_x, 0.0):
 		finished.emit(IDLE)
 		
+	if Input.is_action_just_pressed('attack'):
+		finished.emit(ATTACK)
+		
 	if Input.is_action_just_pressed("ui_accept"):
 		finished.emit(HIT)
