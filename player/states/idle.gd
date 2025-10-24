@@ -14,8 +14,8 @@ func physics_update(_delta: float) -> void:
 		finished.emit(JUMPING)
 	if Input.is_action_just_pressed('attack'):
 		finished.emit(ATTACK)
-	#elif Input.is_action_just_pressed("roll"):
-		#finished.emit(ROLLING, {"inp_dir": -1 if player.animated_sprite.flip_h else 1})
+	elif Input.is_action_just_pressed("roll"):
+		finished.emit(ROLLING, {"inp_dir": -1 if player.animated_sprite.flip_h else 1})
 	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		finished.emit(RUNNING)
 
