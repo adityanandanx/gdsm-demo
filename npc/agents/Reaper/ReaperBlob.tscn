@@ -1,0 +1,154 @@
+[gd_scene load_steps=23 format=3 uid="uid://cr3ftbmfjcg7u"]
+
+[ext_resource type="Texture2D" uid="uid://bm6i62dh0778q" path="res://npc/agents/Reaper/assets/summonDeath.png" id="1_toy68"]
+[ext_resource type="PackedScene" uid="uid://b3urqe4ltnped" path="res://zones/damage_zone.tscn" id="1_yvn5f"]
+[ext_resource type="Texture2D" uid="uid://crlxtffn76ly7" path="res://npc/agents/Reaper/assets/summonIdle.png" id="2_yvn5f"]
+[ext_resource type="Texture2D" uid="uid://b7b2lwh0ipcd5" path="res://npc/agents/Reaper/assets/summonAppear.png" id="3_v0sfk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0sfk"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8cgi"]
+atlas = ExtResource("1_toy68")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_remlb"]
+atlas = ExtResource("1_toy68")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j0ad"]
+atlas = ExtResource("1_toy68")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bltx"]
+atlas = ExtResource("1_toy68")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hbig"]
+atlas = ExtResource("1_toy68")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4k1v"]
+atlas = ExtResource("1_toy68")
+region = Rect2(100, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8t0x"]
+atlas = ExtResource("2_yvn5f")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5680l"]
+atlas = ExtResource("2_yvn5f")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydigk"]
+atlas = ExtResource("2_yvn5f")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx1xj"]
+atlas = ExtResource("2_yvn5f")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n3uk"]
+atlas = ExtResource("3_v0sfk")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_re6g0"]
+atlas = ExtResource("3_v0sfk")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tck2"]
+atlas = ExtResource("3_v0sfk")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjfe2"]
+atlas = ExtResource("3_v0sfk")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30kyx"]
+atlas = ExtResource("3_v0sfk")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g3o8"]
+atlas = ExtResource("3_v0sfk")
+region = Rect2(100, 50, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_suko8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8cgi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_remlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j0ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bltx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hbig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4k1v")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8t0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5680l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydigk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx1xj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n3uk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_re6g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tck2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjfe2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30kyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g3o8")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[node name="ReaperBlob" type="Node2D"]
+
+[node name="DamageZone" parent="." instance=ExtResource("1_yvn5f")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone"]
+position = Vector2(-1, 8)
+shape = SubResource("CircleShape2D_v0sfk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_suko8")
+animation = &"dead"
+autoplay = "spawn"
+frame_progress = 0.04997119
+metadata/_edit_lock_ = true

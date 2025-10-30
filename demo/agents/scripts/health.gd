@@ -8,7 +8,7 @@
 #* https://opensource.org/licenses/MIT.
 #* =============================================================================
 #*
-class_name Health
+class_name Health2
 extends Node
 ## Tracks health and emits signal when damaged or dead.
 

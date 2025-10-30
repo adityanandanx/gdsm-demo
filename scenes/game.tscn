@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://dmynsrdtnsd0w"]
+[gd_scene load_steps=5 format=4 uid="uid://dmynsrdtnsd0w"]
 
 [ext_resource type="TileSet" uid="uid://cxu3y2a673snk" path="res://tilesets/world1.tres" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://3xnyfj6nkjx4" path="res://player/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bnjjpg3256018" path="res://npc/agents/Reaper/Reaper.tscn" id="4_iywne"]
 [ext_resource type="PackedScene" uid="uid://b6uhnm1f74cb0" path="res://npc/hostile/Boar/boar.tscn" id="4_lbhrr"]
 
 [node name="Game" type="Node2D"]
@@ -63,3 +64,6 @@ position = Vector2(1059, -68)
 
 [node name="Boar4" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(1350, -83)
+
+[node name="Reaper" parent="." instance=ExtResource("4_iywne")]
+position = Vector2(326, -101)

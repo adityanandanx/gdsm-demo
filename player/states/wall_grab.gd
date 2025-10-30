@@ -3,7 +3,7 @@ extends PlayerState
 var direction:= Vector2.ZERO
 
 func enter (previous_state_path: String, data: Dictionary = {}) -> void:
-	player.animated_sprite.play("wall_grab")
+	#player.animated_sprite.play("wall_grab")
 	if player.velocity.y < 0: player.velocity.y = 0
 
 
